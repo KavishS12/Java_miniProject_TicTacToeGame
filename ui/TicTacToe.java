@@ -51,41 +51,58 @@ public class TicTacToe extends Application {
                 int finalJ = j;
                 button.setOnAction(e -> {
                     if (playEnabled) {
-                        if (count[0] % 2 == 1){
-                            button.setText("X");
-                            lbl.setText("Player 2's turn");
-                            matrix[finalI][finalJ]=1;
-                            if(checkWinner.ifWinner(matrix,buttons)){
-                                lbl.setText("Player 1 wins!!!");
-                                playEnabled = false;
-                                matrix_check.resetMatrix(matrix);
-                                count[0]=1;
+                        try {
+                            if (count[0] % 2 == 1){
+                                if (matrix[finalI][finalJ] == 0) {
+                                    System.out.println("Played X at grid " + finalI + finalJ);
+                                    button.setText("X");
+                                    lbl.setText("Player 2's turn");
+                                    matrix[finalI][finalJ] = 1;
+                                } else {
+                                    throw new InvalidMoveException("Cell already occupied");
+                                }
+                                if(checkWinner.ifWinner(matrix,buttons)){
+                                    System.out.println("Player 1 wins!!!");
+                                    lbl.setText("Player 1 wins!!!");
+                                    playEnabled = false;
+                                    matrix_check.resetMatrix(matrix);
+                                    count[0] = 1;
+                                }
                             }
-                        }
-                        if (count[0] % 2 == 0){
-                            button.setText("O");
-                            lbl.setText("Player 1's turn");
-                            matrix[finalI][finalJ]=2;
-                            if(checkWinner.ifWinner(matrix,buttons)){
-                                lbl.setText("Player 2 wins!!!");
-                                playEnabled = false;
-                                matrix_check.resetMatrix(matrix);
-                                count[0]=1;
+                            if (count[0] % 2 == 0){                               
+                                if (matrix[finalI][finalJ] == 0) {
+                                    System.out.println("Played O at grid " + finalI + finalJ);
+                                    button.setText("O");
+                                    lbl.setText("Player 1's turn");
+                                    matrix[finalI][finalJ] = 2;
+                                } else {
+                                    throw new InvalidMoveException("Cell already occupied");
+                                }
+                                if(checkWinner.ifWinner(matrix,buttons)){
+                                    System.out.println("Player 2 wins!!!");
+                                    lbl.setText("Player 2 wins!!!");
+                                    playEnabled = false;
+                                    matrix_check.resetMatrix(matrix);
+                                    count[0] = 1;
+                                }
                             }
-                        }
-                        button.setDisable(true);
-                        count[0]++;
-                        if(count[0]==10){
-                            lbl.setText("Game drawn!!!");
-                            for (int a = 0; a < 3; a++) {
-                                for (int b = 0; b < 3; b++){ 
-                                    buttons[a][b].setStyle
-                                    ("-fx-background-color: black; -fx-text-fill: white; -fx-opacity: 0.8;");
-                                }   
+                            //button.setDisable(true);
+                            count[0]++;
+                            if(count[0] == 10){
+                                System.out.println("Game drawn!!!");
+                                lbl.setText("Game drawn!!!");
+                                for (int a = 0; a < 3; a++) {
+                                    for (int b = 0; b < 3; b++){ 
+                                        buttons[a][b].setStyle
+                                        ("-fx-background-color: black; -fx-text-fill: white; -fx-opacity: 0.8;");
+                                    }   
+                                }
                             }
+                        } 
+                        catch (InvalidMoveException ex) {
+                            System.out.println(ex.getMessage());
                         }
                     }
-
                 });
                 grid.add(button, j, i);
             }
@@ -98,6 +115,7 @@ public class TicTacToe extends Application {
         
         btnPlay.setOnAction(e -> {
             if (isFirstClick) {
+                System.out.println("Game started!");
                 btnPlay.setText("RESTART");
                 lbl.setText("Player 1's turn");
                 playEnabled = true;
@@ -116,6 +134,7 @@ public class TicTacToe extends Application {
                         button.setDisable(false);
                     }
                 }
+                System.out.println("Game reset!");
                 count[0] = 1;
                 matrix_check.resetMatrix(matrix);
                 lbl.setText("Player 1's turn");
