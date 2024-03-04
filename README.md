@@ -1,8 +1,5 @@
 <h1> Tic Tac Toe Game using JavaFX </h1>
 
-![Capture](https://github.com/KavishS12/Java_miniProject_TicTacToeGame/assets/117994523/1fad6c84-3070-4dd4-9861-8a6a61c7926f)
-
-
 The JavaFX Tic-Tac-Toe game is a graphical user interface (GUI) implementation of 
 the classic two-player game.It is a Java-based endeavor aimed at recreating the timeless 
 classic in a dynamic and visually engaging manner. This undertaking showcases a 
@@ -29,6 +26,9 @@ The win conditions are essential for determining the outcome of the game. In thi
 The game logic also includes mechanisms for handling player moves and invalid moves. Each player's move is validated to ensure it is within the bounds of the grid and that the selected cell is not already occupied. If a player attempts to make an invalid move, an exception is thrown, and the player is prompted to make a valid move.
 
 <h3>Graphical User Interface (GUI)</h3>
+
+![Capture](https://github.com/KavishS12/Java_miniProject_TicTacToeGame/assets/117994523/1fad6c84-3070-4dd4-9861-8a6a61c7926f)
+
 The graphical user interface (GUI) is a crucial aspect of the Tic Tac Toe game, providing users with a visually appealing and intuitive platform for playing the game. In this implementation, the GUI is designed using the JavaFX library.
 
 
